@@ -1,37 +1,44 @@
-import { ButtonPanel } from "../form";
-import QueryString from 'querystring'
+import { toastError } from "@/utils/toast";
+import { Button, Select } from "../form";
 export const Pagination = ({
-  totalPages, page, hasPrevPage, hasNextPage, setQuery
+  totalPages, page, setPageDetails, limit
 }) => {
   const editPage = (value) => {
-    setQuery((oldQuery) => {
-      const searchParamObject = QueryString.parse(oldQuery);
-      searchParamObject['page'] = value;
-      return QueryString.stringify(searchParamObject);
-    })
+    setPageDetails({ pageNumber: value })
   }
   totalPages = Number(totalPages);
   page = Number(page);
   return (
-    <div className="btn-group btn-sm -ml-2 mb-4">
-      <ButtonPanel
-        {...(hasPrevPage == true ? {} : { disabled: true })}
+    <div className="btn-group flex justify-end btn-sm mb-4 w-9/12 mt-10">
+      <Select
+        classNames={`mr-4`}
+        optionNames={["5", "10", "15", "20"]}
+        optionValues={[5, 10, 15, 20]}
+        defaultValue={limit}
+        onChange={(event) => {
+          const value = event.target.value;
+          setPageDetails({ limit: value, pageNumber: 1 })
+        }}
+      />
+      <div className="mt-2 mr-3"> Showing Page {page} of {totalPages}</div>
+      <Button
         classNames="btn-sm btn-outline btn-primary"
         onClick={() => editPage(page - 1)}
       >
         «
-      </ButtonPanel>
+      </Button>
       {
         totalPages <= 5 &&
         <>
-          {[1, 2, 3, 4, 5].map((value) => {
+          {[1, 2, 3, 4, 5].map((value, index) => {
             return (<>
               {totalPages >= value &&
-                <ButtonPanel
+                <Button
+                  key={index}
                   classNames={`btn-sm btn-outline btn-primary ${value === page ? 'btn-active' : ''}`}
                   onClick={() => editPage(value)}
                 >{value}
-                </ButtonPanel>}
+                </Button>}
 
             </>)
           })}
@@ -40,29 +47,32 @@ export const Pagination = ({
       {
         totalPages > 5 &&
         <>
-          {[1, 2, 3, totalPages - 2, totalPages - 1, totalPages].map((value) => {
+          {[1, 2, 3, totalPages - 2, totalPages - 1, totalPages].map((value, index) => {
             return (<>
               {(
                 // 1,2,3
                 totalPages >= value ||
                 // page-1, page, page+1
                 (value > 3)) &&
-                <ButtonPanel
+                <Button
+                  key={index}
                   classNames={`btn-sm btn-outline btn-primary ${value === page ? 'btn-active' : ''}`}
                   onClick={() => editPage(value)}
                 >{value}
-                </ButtonPanel>}
+                </Button>}
 
             </>)
           })}
         </>
       }
-      <ButtonPanel
-        {...(hasNextPage == true ? {} : { disabled: true })}
+      <Button
         classNames="btn-sm btn-outline btn-primary"
-        onClick={() => editPage(page + 1)}
+        onClick={() => {
+          if (page + 1 < totalPages) editPage(page + 1)
+        }}
       >
         »
-      </ButtonPanel>
+      </Button>
+      <div></div>
     </div >)
 }

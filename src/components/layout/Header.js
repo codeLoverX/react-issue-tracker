@@ -2,13 +2,19 @@
 
 const Avatar = () => {
     return (
-        <>Avatar</>)
+        <>
+            <div className="avatar">
+                <div className="w-12 rounded-full mr-6">
+                    <img src="/me.jpg" />
+                </div>
+            </div>
+        </>)
 }
 
 export default function Header() {
 
     return (
-        <div className='border-gray navbar border-b bg-slate-50 shadow-lg '>
+        <div className='border-gray navbar border-b bg-slate-50 shadow-lg py-4'>
             <div className='navbar-start'>
                 <div className='dropdown'>
                     <label tabIndex={0} className='btn-ghost btn lg:hidden'>
@@ -37,7 +43,7 @@ export default function Header() {
             </div>
             <div className='navbar-end hidden lg:flex'>
                 <ul className='menu menu-horizontal px-1 text-lg font-semibold'>
-                <Avatar />
+                    <Avatar />
                 </ul>
             </div>
         </div>

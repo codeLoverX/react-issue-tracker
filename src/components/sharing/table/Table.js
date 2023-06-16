@@ -9,7 +9,6 @@ export const Table = ({
         <table className={`table table-zebra w-full table-compact ${classNames!==undefined ? classNames : ""}`}>
             <thead>
             <tr>
-                <th></th>
                 {tableHeading.map((value, index) => (
                     <Fragment key={value?.id || index}>
                      <th>{value}</th>

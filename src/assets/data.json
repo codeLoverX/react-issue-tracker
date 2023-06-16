@@ -1,0 +1,94 @@
+[
+    {
+        "type": "Internet issue",
+        "id": 111,
+        "description": "Internet not found (missing)"
+    },
+    {
+        "type": "Wifi issue",
+        "id": 112,
+        "description": "Wifi not found (missing)"
+    },
+    {
+
+        "type": "Mobile data issue",
+        "id": 113,
+        "description": "Mobile data not found (missing)"
+    },
+    {
+        "type": "Intranet issue",
+        "id": 114,
+        "description": "Intranet not found (missing)"
+    },
+    {
+        "type": "Server issue",
+        "id": 115,
+        "description": "Server not found (missing)"
+    },
+    {
+        "type": "Authentication issue",
+        "id": 116,
+        "description": "Authentication not found (missing)"
+    },
+    {
+        "type": "Server issue",
+        "id": 117,
+        "description": "Server not found (missing)"
+    },
+    {
+        "type": "Email issue",
+        "id": 118,
+        "description": "Email not found (missing)"
+    },
+    {
+        "type": "Password issue",
+        "id": 119,
+        "description": "Password not found (missing)"
+    },
+
+    {
+        "type": "JWT token issue",
+        "id": 120,
+        "description": "JWT token not found (missing)"
+    },
+    {
+        "type": "Role issue",
+        "id": 121,
+        "description": "Role not found (missing)"
+    },
+    {
+        "type": "Cookie issue",
+        "id": 122,
+        "description": "Cookie not found (missing)"
+    },
+    {
+        "type": "Session issue",
+        "id": 123,
+        "description": "Session not found (missing)"
+    },
+    {
+        "type": "Web cookie issue",
+        "id": 124,
+        "description": "Web cookie not found (missing)"
+    },
+    {
+        "type": "Sign in link issue",
+        "id": 125,
+        "description": "Sign in link not found (missing)"
+    },
+    {
+        "type": "Password reset issue",
+        "id": 126,
+        "description": "Password reset not found (missing)"
+    },
+    {
+        "type": "Refresh token issue",
+        "id": 127,
+        "description": "Refresh token not found (missing)"
+    },
+    {
+        "type": "Token reset issue",
+        "id": 128,
+        "description": "Token reset not found (missing)"
+    }
+]

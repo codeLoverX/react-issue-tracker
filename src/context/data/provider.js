@@ -13,7 +13,6 @@ export const DataContextProvider = ({ children }) => {
     () => ({
       ...state,
       setList: (issueList) => {
-        console.log({list: issueList})
         dispatch({ type: actions.SET_LIST, issueList});
       },
       addList: (newIssue) => {
@@ -25,8 +24,11 @@ export const DataContextProvider = ({ children }) => {
       editList: (id, editIssue) => {
         dispatch({ type: actions.EDIT_LIST, id, editIssue });
       },
-      setPage: ({limit, offset}) => {
-        dispatch({ type: actions.SET_PAGE, limit, offset });
+      setPageDetails: (pageDetailsObj) => {
+        dispatch({ type: actions.SET_PAGE_DETAILS, pageDetailsObj });
+      },
+      setCurrentIssue: (issueId) => {
+        dispatch({ type: actions.SET_CURRENT_ISSUE, issueId });
       },
     }),
     [state, dispatch]

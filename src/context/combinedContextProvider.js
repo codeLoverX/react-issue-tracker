@@ -1,5 +1,6 @@
 import React from "react";
 import { DataContextProvider } from "./data/provider";
+import { FeedbackContextProvider } from "./feedback/provider";
 
 const ContextProviderComposer = ({ contextProviders, children }) => {
   return contextProviders.reduceRight(
@@ -12,6 +13,7 @@ const CombinedContextProviders = ({ children }) => {
       <ContextProviderComposer
         contextProviders={[
           <DataContextProvider key={"data"} />,
+          <FeedbackContextProvider key={"feedback"} />
         ]}
       >
         {children}

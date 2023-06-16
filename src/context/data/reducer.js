@@ -1,48 +1,65 @@
 import { dataActionTypes as actions } from "./actions";
-import { paginateHelper } from "../../utils/paginate";
+import { paginateHelper, paginateLastPageHelper } from "../../utils/paginate";
 
 export const dataReducer = (state, action) => {
   switch (action.type) {
     case actions.SET_LIST:
-      console.log({actions})
       return {
         ...state,
         issueList: action.issueList,
-        page: { 
-            ...paginateHelper(state?.page || 1, state?.limit || 5, action?.issueList || [])
-        }
+        issuePage: paginateHelper(state.pageNumber, state.limit, action.issueList)
+
       };
     case actions.ADD_LIST:
+      action.newIssue.id = state.issueList[state.issueList.length-1].id+1
       const newList = [...state.issueList, action.newIssue]
+      const newPage = paginateLastPageHelper(state.limit, newList)
       return {
         ...state,
         issueList: newList,
-        ...paginateHelper(newList, state?.limit, state?.issueList )
+        issuePage: newPage,
+        pageNumber: newPage.totalPages,
       };
     case actions.DELETE_LIST:
-       const deletedIssue = state.issueList.filter(value => value._id !== action.id) 
+      const deletedIssue = state.issueList.filter(value => value.id !== action.id)
 
       return {
         ...state,
         issueList: deletedIssue,
-        ...paginateHelper(deletedIssue, state?.limit, state?.issueList )
+        issuePage: paginateHelper(state.pageNumber, state.limit, deletedIssue)
       };
     case actions.EDIT_LIST:
-        const editedList =  state.issueList.map(value => {
-            return value._id != action.id ? value : action.editIssue
-        })
+      const editedList = state.issueList.map(value => {
+        return value.id != action.id ? value : action.editIssue
+      })
       return {
         ...state,
         issueList: editedList,
-        ...paginateHelper(editedList, state?.limit, state?.issueList )
+        issuePage: paginateHelper(state.pageNumber, state.limit, editedList)
       };
-      
-    case actions.SET_PAGE: 
+
+    case actions.SET_PAGE_DETAILS:
+      console.log({ action })
+      const {limit, pageNumber} = action.pageDetailsObj     
       return {
         ...state,
-        limit: action?.limit || state.limit,
-        offset: action?.offset || state.offset
+        limit: limit || state.limit,
+        pageNumber: pageNumber || state.pageNumber,
+        issuePage: paginateHelper(pageNumber || state.pageNumber, limit || state.limit, state.issueList)
       }
+
+    case actions.SET_CURRENT_ISSUE:
+
+      const currentIssue = action.issueId == -1 ? null :
+        state.issueList.filter(
+          (value) => {
+            return value.id == action.issueId
+          }
+        )
+      return {
+        ...state,
+        currentIssue: currentIssue !== null ? currentIssue[0] : null
+      };
     default:
       return state;
   }
