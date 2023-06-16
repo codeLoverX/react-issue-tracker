@@ -3,9 +3,12 @@ export const Button = ({
     classNames,
     children,
     onClick,
+    disabled
 }) => {
+    disabled ??= false
     return (
         <button
+            disabled={disabled}
             onClick={onClick}
             className={`btn btn-sm btn-primary ${classNames != undefined ? classNames : ""}`}
             {...(type !== null ? { type } : {})}

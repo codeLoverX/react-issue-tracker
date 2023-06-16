@@ -9,7 +9,7 @@ export const IssueForm = ({
     const [loading, setLoading] = useState(false);
     const { currentIssue, setCurrentIssue, addList, editList } = useDataContext()
     const isAddMode = currentIssue == null;
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({ mode: "onChange" });
     const onSubmit = (data, event) => {
         setLoading(true);
         event.preventDefault();
@@ -28,7 +28,7 @@ export const IssueForm = ({
             catch (error) {
                 toastError(error)
             }
-            finally{
+            finally {
                 setLoading(false);
                 setModal(false)
             }
@@ -68,16 +68,34 @@ export const IssueForm = ({
                     <Label text="Issue Type" />
                     <Input
                         type="text"
-                        {...register("type")}
+                        {...register("type",
+                            {
+                                required: "This is required",
+                                minLength: {
+                                    value: 3,
+                                    message: "Type must be 3 letters or more"
+                                }
+                            }
+                        )}
                         defaultValue={currentIssue?.type}
                     />
+                    {errors.type && <p>{errors.type?.message}</p>}
                     <Label text="Issue Description" />
                     <TextArea
                         type="text"
                         id="description"
-                        {...register("description")}
+                        {...register("description",
+                            {
+                                required: "This is required",
+                                minLength: {
+                                    value: 10,
+                                    message: "Description must be 10 letters or more"
+                                },
+                            }
+                        )}
                         defaultValue={currentIssue?.description}
                     />
+                    {errors.description && <p>{errors.description?.message}</p>}
                     <div className="flex justify-around mt-4">
                         {
                             isAddMode ?
@@ -88,10 +106,10 @@ export const IssueForm = ({
                                 </>
                                 :
                                 <>
-                                    <Button className={`btn btn-primary mt-4 ${loading ? "loading" : ""}`} type="submit">
+                                    <Button classNames={`btn btn-primary mt-4 ${loading ? "loading" : ""}`} type="submit">
                                         Edit Issue
                                     </Button>
-                                    <Button className={`btn btn-primary mt-4 ml-5`}
+                                    <Button classNames={`btn btn-primary mt-4 ml-5`}
                                         onClick={() => { reset(); setCurrentIssue(null); }}>
                                         Add mode
                                     </Button>

@@ -3,7 +3,7 @@ import { Loading } from "../layout/Loading";
 import { useDataContext } from "@/context/data/provider";
 import { useEffect, useState } from "react";
 import { useFeedbackContext } from "@/context/feedback/provider";
-import { Modal } from "../sharing/form";
+import { Button, Modal } from "../sharing/form";
 
 export const IssueList = ({
 }) => {
@@ -58,7 +58,7 @@ export const IssueList = ({
                                                             loadingIndex === index
                                                             &&
                                                             <div className={`absolute top-6 opacity-100 bg-white right-0 z-50`}>
-                                                                <div className="card w-96 bg-base-100 opacity-100 z-50">
+                                                                <div className="card w-96 bg-base-100 shadow-xl z-50">
                                                                     <div className="card-body z-50">
                                                                         <h2 className="card-title">
                                                                             Delete Issue!
@@ -66,7 +66,7 @@ export const IssueList = ({
                                                                         </h2>
                                                                         <p>ARE YOU SURE YOU WANT TO DELETE THIS ISSUE?</p>
                                                                         <div className="card-actions justify-end z-50 cursor-pointer">
-                                                                            <button
+                                                                            <Button
                                                                                 className="btn btn-sm z-50 btn-primary"
                                                                                 onClick={() => {
                                                                                     setTimeout(() => {
@@ -74,14 +74,14 @@ export const IssueList = ({
                                                                                         setLoadingIndex(-1);
                                                                                     }, 2000)
                                                                                 }}
-                                                                            >Yes</button>
-                                                                            <button
+                                                                            >Yes</Button>
+                                                                            <Button
                                                                                 className="btn btn-sm z-50 btn-primary cursor-pointer"
                                                                                 onClick={() => {
                                                                                     setLoadingIndex(-1);
                                                                                 }
                                                                                 }
-                                                                            >No</button>
+                                                                            >No</Button>
                                                                         </div>
                                                                     </div>
                                                                 </div>

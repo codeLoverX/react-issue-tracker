@@ -23,7 +23,10 @@ export const Pagination = ({
       <div className="mt-2 mr-3"> Showing Page {page} of {totalPages}</div>
       <Button
         classNames="btn-sm btn-outline btn-primary"
-        onClick={() => editPage(page - 1)}
+        disabled={page-1 <= 0}
+        onClick={() => {
+          if (page - 1 > 0) editPage(page - 1)
+        }}
       >
         «
       </Button>
@@ -67,8 +70,9 @@ export const Pagination = ({
       }
       <Button
         classNames="btn-sm btn-outline btn-primary"
+        disabled={page+1 > totalPages}
         onClick={() => {
-          if (page + 1 < totalPages) editPage(page + 1)
+          if (page + 1 <= totalPages) editPage(page + 1)
         }}
       >
         »

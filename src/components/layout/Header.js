@@ -3,10 +3,11 @@
 const Avatar = () => {
     return (
         <>
-            <div className="avatar">
+            <div className="avatar relative">
                 <div className="w-12 rounded-full mr-6">
                     <img src="/me.jpg" />
                 </div>
+                <div className="w-[30px] h-[20px] bg-red-400 absolute -top-2 right-0 text-sm text-center text-white">42</div>
             </div>
         </>)
 }
